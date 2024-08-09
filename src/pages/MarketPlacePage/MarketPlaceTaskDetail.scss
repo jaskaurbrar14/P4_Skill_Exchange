@@ -1,3 +1,8 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
+
 .task__detail {
   display: flex;
   width: 100%;
@@ -14,53 +19,92 @@
     align-items: flex-end;
     width: 100%;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #4D4D4D;
+    border-bottom: 1px solid #4d4d4d;
     &__info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
 
-      .task__title {
-        font-size: 2rem;
-        font-family: "Gilroy";
-        font-weight: 400;
-        color: #4D4D4D;
-      }
-
-      .task__description {
-        font-size: 1rem;
-        font-weight: 600;
-        max-width: 500px;
-      }
-
-      .task__tags {
+      .task__info {
         display: flex;
         justify-content: space-between;
+        flex-direction: row;
         align-items: center;
         margin-top: 1rem;
-      }
-    }
-    &__buttons {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 1rem;
-    }
-    &__favorite {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-      background-color: #FF7070;
-      cursor: pointer;
-      transition: all 200ms ease-in-out;
+        margin-bottom: 1.5625rem;
+        width: 100%;
+        &--title {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 700;
+          font-size: 1.5625rem;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #0954b0;
+          margin-right: auto;
+          display: block;
+        }
+        &--icon {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          background-color: #ff7070;
+          cursor: pointer;
+          transition: all 200ms ease-in-out;
 
-      &:hover {
-        transform: scale(1.2);
+          &:hover {
+            transform: scale(1.2);
+          }
+          &-favourite {
+          }
+        }
+      }
+      .task__description {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.4rem;
+        width: 80%;
+      }
+      .task__actions {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-direction: row;
+        margin: 1rem 0 0.5rem 0;
+        &--tags {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        &--buttons {
+          font-family: 'Poppins', sans-serif;
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          font-weight: bold;
+          color: #ffffff;
+          background-color: $MVP-dark-blue;
+          border: none;
+          border-radius: 0.25rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: $MVP-light-blue;
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+          }
+
+          &:active {
+            background-color: $MVP-light-blue;
+          }
+        }
       }
     }
   }
@@ -84,30 +128,43 @@
 
       &-header {
         h3 {
-          font-weight: 400;
-          font-size: 1.2rem;
-          margin-bottom: 10px;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 1.5625rem;
+          font-size: 1.5rem;
+          color: #000000;
+          display: block;
+          margin-bottom: 1.5625rem;
         }
 
         p {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 500;
           font-size: 1rem;
-          font-weight: 600;
+          line-height: 1.4rem;
         }
       }
 
       &-bottom {
         h5 {
-          font-size: 1.2rem;
-          font-weight: 400;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 1.5625rem;
+          font-size: 1.5rem;
+          color: #000000;
+          display: block;
+          margin-bottom: 1.5625rem;
         }
 
         ul > li {
           list-style-type: disc;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 500;
           font-size: 1rem;
-          font-weight: 600;
+          line-height: 1.4rem;
           margin-left: 1.5rem;
         }
       }
-    };
+    }
   }
 }

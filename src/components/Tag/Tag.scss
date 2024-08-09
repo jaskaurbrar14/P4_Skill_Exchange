@@ -1,4 +1,16 @@
-.tag__item {
-  background-color: #374151 ;
-  color: #000;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
+
+.tag {
+  font-family: 'Poppins', sans-serif;
+  display: inline-block;
+  background-color: $MVP-yellow;
+  border-radius: 9999px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: black;
+  margin-right: 0.5rem;
 }

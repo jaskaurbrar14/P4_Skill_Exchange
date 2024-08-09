@@ -4,7 +4,6 @@ import HeartIcon from '/icons/heart-icon.svg'
 import ProjectCardModal from '@/src/components/Modals/ProjectCardModal/ProjectCardModal'
 import { getJobDetailsByJobId } from '@/src/utils/Firebase'
 import Tag from '@/src/components/Tag/Tag'
-import Button from '@/src/components/SeButton/SeButton'
 import TaskPosterCard from '@/src/pages/MarketPlacePage/components/TaskPosterCard/TaskPosterCard'
 import './MarketPlaceTaskDetail.scss'
 import { Job } from '@/src/interfaces/types'
@@ -49,37 +48,40 @@ function MarketplaceTaskDetail() {
     <div className="task__detail">
       <div className="task__detail-header">
         <div className="task__detail-header__info">
-          <>
-            <h1 className="task__title">{jobDetail.title}</h1>
-            <p className="task__description">{jobDetail.description}</p>
-          </>
-
-          <div className="task__tags">
-            {jobDetail.categories?.map((category, index) => (
-              <Tag key={index} text={category} />
-            ))}
+          <div className="task__info">
+            <h1 className="task__info--title">{jobDetail.title}</h1>
+            <div className="task__info--icon">
+              <img
+                src={HeartIcon}
+                alt="header__info-icon"
+                className="task__info--icon-favourite"
+              />
+            </div>
           </div>
-        </div>
-        <div className="task__detail-header__buttons">
-          <div className="task__detail-header__favorite">
-            <img src={HeartIcon} alt="header__favorite-icon" />
+          <p className="task__description">{jobDetail.description}</p>
+          <div className="task__actions">
+            <div className="task__actions--tags">
+              {jobDetail.categories?.map((category, index) => (
+                <Tag key={index} text={category} />
+              ))}
+            </div>{' '}
+            <div className="task__actions--buttons">
+              <button onClick={() => setIsProjectCardModalOpen(true)}>
+                Apply Now
+              </button>
+              <ProjectCardModal
+                isProjectCardModalOpen={isProjectCardModalOpen}
+                onClose={() => setIsProjectCardModalOpen(false)}
+                taskTitle={jobDetail.title}
+                onViewMoreProjects={() => {}}
+                questions={jobDetail.questions}
+                userId={jobDetail.usedID}
+                jobId={jobDetail.id}
+              >
+                {/* <Button text="apply now" onClick={() => {}} /> */}
+              </ProjectCardModal>
+            </div>
           </div>
-          <Button
-            text="apply now"
-            onClick={() => setIsProjectCardModalOpen(true)}
-            colorScheme="#FFD22F"
-          />
-          <ProjectCardModal
-            isProjectCardModalOpen={isProjectCardModalOpen}
-            onClose={() => setIsProjectCardModalOpen(false)}
-            taskTitle={jobDetail.title}
-            onViewMoreProjects={() => {}}
-            questions={jobDetail.questions}
-            userId={jobDetail.usedID}
-            jobId={jobDetail.id}
-          >
-            <Button text="apply now" onClick={() => {}} colorScheme="#FFD22F" />
-          </ProjectCardModal>
         </div>
       </div>
       <div className="task__detail-bottom">
