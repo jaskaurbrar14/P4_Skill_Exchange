@@ -11,7 +11,8 @@ import {
   where,
   addDoc,
   setDoc,
-  Timestamp
+  Timestamp,
+  deleteDoc
 } from 'firebase/firestore'
 
 // Set up our config for Firebase
@@ -47,6 +48,27 @@ export async function getAllTasks() {
     return { id: doc.id, ...doc.data() }
   })
   return tasks
+}
+
+//get job details based on a job id
+
+export async function getJobDetailsByJobId(jobId: string) {
+  try {
+    // Reference to the specific job document
+    const jobRef = doc(db, 'Jobs', jobId)
+    const jobDoc = await getDoc(jobRef)
+    // Check if the job document exists
+    if (!jobDoc.exists()) {
+      console.error(`Job with ID ${jobId} not found`)
+      return null
+    }
+    // Extract job data
+    const jobData = { id: jobDoc.id, ...jobDoc.data() }
+    return jobData
+  } catch (error) {
+    console.error('Error fetching job details:', error)
+    throw error // Rethrow the error after logging it
+  }
 }
 
 // Get user info for the user who created a job given the job ID
@@ -341,6 +363,30 @@ export async function getUserCreatedJobs(userId: string): Promise<any[]> {
     return jobs
   } catch (error) {
     console.error('Error fetching user created jobs:', error)
+    throw error
+  }
+}
+
+// Delete a specific job by its id
+// This function is used to delete a job by its job id
+// and the deleted job will not be visible on jobs page and database.
+export async function deleteJobById(jobId: string) {
+  try {
+    const jobRef = doc(db, 'Jobs', jobId)
+    const jobDoc = await getDoc(jobRef)
+
+    if (!jobDoc.exists()) {
+      throw new Error('Job not found')
+    }
+
+    const jobData = jobDoc.data()
+    const jobTitle = jobData.title
+
+    await deleteDoc(jobRef)
+
+    return jobTitle
+  } catch (error) {
+    console.error('Error deleting job:', error)
     throw error
   }
 }
