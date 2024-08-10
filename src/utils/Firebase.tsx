@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app'
-import { toast } from 'react-toastify'
 
 import {
   collection,
@@ -46,7 +45,6 @@ export const db = getFirestore(app)
 export async function getAllTasks() {
   const data = await getDocs(collection(db, 'Jobs'))
   const tasks = data.docs.map(doc => {
-    console.log(doc.data().title)
     return { id: doc.id, ...doc.data() }
   })
   return tasks
@@ -83,8 +81,6 @@ export async function getUserDataForSpecificTask(jobID: string) {
   const userID = jobDoc.data().userId
   const userRef = doc(db, 'Users', userID)
   const userDoc = await getDoc(userRef)
-
-  console.log(userDoc.data())
 }
 
 // Edit user data
@@ -200,7 +196,6 @@ export async function getUserData(userID: string) {
     const userDoc = await getDoc(userRef)
 
     if (userDoc.exists()) {
-      console.log('User data:', userDoc.data())
       return userDoc.data()
     } else {
       console.log('No such user!')
@@ -356,44 +351,42 @@ export async function getAllProjectsByUserID(userID: string) {
   }
 }
 
-// Set the status of a job to completed
-// 0 = Open, 1 = In Progress, 2 = Completed
-// This function is used to mark a job as completed when the user has finished the job,
-// and the job creator marks it as complete.
+// Get jobs posted by a specific user
 
-export async function setJobToCompleted(jobID: string) {
+export async function getUserCreatedJobs(userId: string): Promise<any[]> {
   try {
-    const jobRef = doc(db, 'Jobs', jobID)
-    await updateDoc(jobRef, { status: 2 })
+    const jobsRef = collection(db, 'Jobs')
+    const userJobsQuery = query(jobsRef, where('userID', '==', userId))
+    const querySnapshot = await getDocs(userJobsQuery)
 
-    console.log('Job status updated to completed')
-    return { message: 'Job status updated to completed' }
+    const jobs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    return jobs
   } catch (error) {
-    console.error('Error updating job status:', error)
+    console.error('Error fetching user created jobs:', error)
     throw error
   }
 }
 
 // Delete a specific job by its id
-// This function is used to delete a job by its job id 
+// This function is used to delete a job by its job id
 // and the deleted job will not be visible on jobs page and database.
 export async function deleteJobById(jobId: string) {
   try {
-    const jobRef = doc(db, 'Jobs', jobId);
-    const jobDoc = await getDoc(jobRef);
+    const jobRef = doc(db, 'Jobs', jobId)
+    const jobDoc = await getDoc(jobRef)
 
     if (!jobDoc.exists()) {
-      throw new Error('Job not found');
+      throw new Error('Job not found')
     }
 
-    const jobData = jobDoc.data();
-    const jobTitle = jobData.title;
+    const jobData = jobDoc.data()
+    const jobTitle = jobData.title
 
-    await deleteDoc(jobRef);
+    await deleteDoc(jobRef)
 
-    return jobTitle;
+    return jobTitle
   } catch (error) {
-    console.error('Error deleting job:', error);
-    throw error;
+    console.error('Error deleting job:', error)
+    throw error
   }
 }
