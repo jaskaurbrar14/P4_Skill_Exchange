@@ -51,7 +51,7 @@ function TaskPosterCard({ createdDate, jobDetails }: TaskPosterProps) {
             <p>{userDetail?.expertise}</p>
           </div>
         </div>
-        <div className="task__poster-bio__bottom">
+        {/* <div className="task__poster-bio__bottom">
           <h3 className="contact__title">Contact Info</h3>
           <ul className="contact__list">
             <li className="contact__list-item">
@@ -65,20 +65,22 @@ function TaskPosterCard({ createdDate, jobDetails }: TaskPosterProps) {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="task__poster-task__info">
-        <ul className="task__info-list">
+        {/* <ul className="task__info-list">
           <li className="task__info-list__item">
             <span>Date Posted</span>
             <span>{date}</span>
           </li>
-        </ul>
+        </ul> */}
         <div className="task__poster-skills">
           <h3 className="task__poster-skills__title">Skills & Tools</h3>
           <div className="task__poster-skills__list">
             {userDetail?.skills.map((skill, index) => (
-              <Tag key={index} text={skill.skillName} />
+              <span key={index} className="task__poster-skills__list-tag">
+                {skill.skillName}
+              </span>
             ))}
           </div>
         </div>
