@@ -14,7 +14,7 @@ interface Project {
 interface ProjectCardProps {
   project: Project
 }
-
+6
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <div className="project-card">

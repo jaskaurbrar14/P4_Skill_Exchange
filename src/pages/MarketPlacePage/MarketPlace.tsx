@@ -59,7 +59,6 @@ const MarketPlace = () => {
     setSelectedCategory(category)
   }
 
-  console.log(jobs)
   return (
     <div className="mx-auto p-4 w-full">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

@@ -65,7 +65,7 @@ const CreateProjectModal: React.FC<ProjectModalProps> = ({
 
   //Cover image links
   const coverImage1 =
-    'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   const coverImage2 =
     'https://images.unsplash.com/photo-1592609931041-40265b692757?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   const coverImage3 =
@@ -106,8 +106,13 @@ const CreateProjectModal: React.FC<ProjectModalProps> = ({
                   className="project-modal__input"
                   name="title"
                   value={title}
-                  onChange={e => setTitle(e.target.value)}
+                  onChange={e => {
+                    if (e.target.value.length <= 50) {
+                      setTitle(e.target.value)
+                    }
+                  }}
                   placeholder="Eg. Mobile App Developer Needed"
+                  maxLength={50}
                 />
               </div>
             </div>

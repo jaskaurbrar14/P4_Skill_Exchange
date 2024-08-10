@@ -29,8 +29,6 @@ function SkillShare() {
     fetchUserProjects()
   }, [])
 
-  console.log(userCreatedProjects)
-
   const handleModalSubmit = async (project: any) => {
     const userID = 'UID99993230'
     const newJobId = await createNewJob(

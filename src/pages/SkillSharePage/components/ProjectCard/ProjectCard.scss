@@ -6,19 +6,19 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  height: 30rem;
+  height: 35rem;
   width: 22.2rem;
   @include component-border;
   padding: 1rem;
-  overflow: hidden;
+  //   overflow: hidden;
   //   margin-bottom: 1rem;
   //   transition: box-shadow 0.3s ease-in-out;
   background-color: $MVP-white;
 
   &__thumbnail {
     width: 100%;
-    height: 10rem;
-    overflow: hidden;
+    height: 7rem;
+    @include component-border-light;
   }
   &__image {
     width: 100%;
@@ -30,9 +30,10 @@
   //     // padding: 1rem;
   //   }
   &__title {
+    height: 5rem;
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
-    color: $MVP-dark-blue;
+    color: $MVP-dark-gray;
   }
 
   &__description {

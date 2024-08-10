@@ -44,7 +44,6 @@ export const db = getFirestore(app)
 export async function getAllTasks() {
   const data = await getDocs(collection(db, 'Jobs'))
   const tasks = data.docs.map(doc => {
-    console.log(doc.data().title)
     return { id: doc.id, ...doc.data() }
   })
   return tasks
@@ -60,8 +59,6 @@ export async function getUserDataForSpecificTask(jobID: string) {
   const userID = jobDoc.data().userId
   const userRef = doc(db, 'Users', userID)
   const userDoc = await getDoc(userRef)
-
-  console.log(userDoc.data())
 }
 
 // Edit user data
@@ -177,7 +174,6 @@ export async function getUserData(userID: string) {
     const userDoc = await getDoc(userRef)
 
     if (userDoc.exists()) {
-      console.log('User data:', userDoc.data())
       return userDoc.data()
     } else {
       console.log('No such user!')
